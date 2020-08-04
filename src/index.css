@@ -7,3 +7,31 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.spacer {
+  height: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex--column {
+  flex-direction: column;
+}
+
+.flex--align-center {
+  align-items: center;
+}
+
+.flex--justify-center {
+  justify-content: center;
+}
+
+.flex--justify-evenly {
+  justify-content: space-evenly;
+}
+
+.flex--wrap {
+  flex-wrap: wrap;
+}
