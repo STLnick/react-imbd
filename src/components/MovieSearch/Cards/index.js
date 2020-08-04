@@ -10,6 +10,7 @@ export const Cards = ({ movies }) => {
       return (
         <div key={movie.id} className="card flex flex--column flex--align-center flex--justify-evenly">
           <h2>{movie.title}</h2>
+          <p><strong>Released:</strong> {movie.release_date ? movie.release_date : 'TBD'}</p>
           <p>{movie.overview}</p>
           <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}`} alt="Movie poster" />
         </div>
