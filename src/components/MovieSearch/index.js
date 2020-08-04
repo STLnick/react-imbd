@@ -8,13 +8,6 @@ import { Form } from './Form'
 export const MovieSearch = () => {
   const [movies, setMovies] = useState([])
 
-  useEffect(() => {
-    (async () => {
-      const fetchedMovies = await api.index()
-      setMovies(fetchedMovies)
-    })()
-  }, [])
-
   return (
     <main>
       <Form />
