@@ -3,6 +3,6 @@ import React from 'react'
 export const Form = () => {
 
   return (
-    <p>FORM</p>
+    <input type="search" placeholder="Find Movies..." />
   )
 }
