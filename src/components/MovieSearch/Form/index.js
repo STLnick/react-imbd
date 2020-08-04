@@ -1,8 +1,18 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export const Form = () => {
+import './Form.css'
+
+export const Form = ({ handler }) => {
 
   return (
-    <input type="search" placeholder="Find Movies..." />
+    <form onSubmit={handler} className="flex flex--column flex--align-center flex--justify-center">
+      <input type="search" placeholder="Find Movies..." />
+      <button type="submit">Search</button>
+    </form>
   )
+}
+
+Form.propTypes = {
+  handler: PropTypes.func
 }
