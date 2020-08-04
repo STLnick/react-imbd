@@ -24,8 +24,9 @@ export const MovieSearch = () => {
 
   return (
     <main>
-      <Form />
-      <Cards />
+      <Form handler={handleSubmit} />
+      <Cards movies={movies} />
+      <div className="spacer"></div>
     </main>
   )
 }
