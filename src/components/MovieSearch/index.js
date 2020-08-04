@@ -8,13 +8,43 @@ import { Form } from './Form'
 export const MovieSearch = () => {
   const [movies, setMovies] = useState([])
 
+  const handleDetailsClick = async (e) => {
+    console.log('DETAILS CLICK')
+    console.log(e.target.dataset.id)
+
+    const searchResponse = await api.details(e.target.dataset.id)
+
+    console.log(searchResponse)
+
+    setMovies([searchResponse.results])
+  }
+
+  const handleRecommendedMoviesClick = async (e) => {
+    const movieID = e.target.dataset.id
+    const searchResponse = await api.recommended(movieID)
+
+    setMovies(searchResponse.results)
+  }
+
+  const handleUpcomingMoviesClick = async () => {
+    const searchResponse = await api.upcoming()
+
+    setMovies(searchResponse.results)
+  }
+
+  const handleCheckboxChange = (e) => {
+    const numberInput = document.querySelector('input[type="number"]')
+    e.target.checked ? numberInput.disabled = false : numberInput.disabled = true
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     // Grab input fields
     const searchInput = e.target.querySelector('input[type="search"]')
     const numberInput = e.target.querySelector('input[type="number"]')
     const checkboxInput = e.target.querySelector('input[type="checkbox"]')
-    // Get value from input field
+
+    // Get value from search input field
     const searchText = searchInput.value
 
     if (searchText) {
@@ -27,7 +57,7 @@ export const MovieSearch = () => {
       // Filter movies appropriately
       if (checkboxInput.checked) {
         filteredMovies = searchedMovies
-          .filter(movie => movie.release_date ? Number(movie.release_date.slice(0, 4)) < numberInput.value : Number(new Date().toDateString.slice(0, 4)) < numberInput.value)
+          .filter(movie => movie.release_date ? Number(movie.release_date.slice(0, 4)) < numberInput.value : Number(new Date().toDateString().slice(0, 4)) < numberInput.value)
       } else {
         filteredMovies = searchedMovies
       }
@@ -45,8 +75,11 @@ export const MovieSearch = () => {
 
   return (
     <main>
-      <Form handler={handleSubmit} />
-      <Cards movies={movies} />
+      <Form handlers={{ submit: handleSubmit, checked: handleCheckboxChange, upcoming: handleUpcomingMoviesClick }} />
+      <Cards
+        buttonHandlers={{ recommended: handleRecommendedMoviesClick, details: handleDetailsClick }}
+        movies={movies}
+      />
       <div className="spacer"></div>
     </main>
   )
