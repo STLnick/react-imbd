@@ -36,21 +36,25 @@ export const Cards = ({ buttonHandlers, movies }) => {
   }
 
   const renderCards = () => {
-    return movies.map(movie => {
+    if (movies) {
+      return movies.map(movie => {
 
-      return (
-        <div key={movie.id} className="card flex flex--column flex--align-center flex--justify-evenly">
-          <h2>{movie.title}</h2>
-          {movie.tagline ? <blockquote>{movie.tagline}</blockquote> : ''}
-          <p><strong>Released:</strong> {movie.release_date ? movie.release_date : 'TBD'}</p>
-          {movie.budget ? <p><strong>Budget:</strong> {getFormattedBudget(movie.budget.toString())}</p> : ''}
-          <p>{movie.overview}</p>
-          <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}`} alt="Movie poster" />
-          <button data-id={movie.id} onClick={buttonHandlers.details} type="button">Get Movie Details</button>
-          <button data-id={movie.id} onClick={buttonHandlers.recommended} type="button">See Recommended Movies</button>
-        </div>
-      )
-    })
+        return (
+          <div key={movie.id} className="card flex flex--column flex--align-center flex--justify-evenly">
+            <h2>{movie.title}</h2>
+            {movie.tagline ? <blockquote>{movie.tagline}</blockquote> : ''}
+            <p><strong>Released:</strong> {movie.release_date ? movie.release_date : 'TBD'}</p>
+            {movie.budget ? <p><strong>Budget:</strong> {getFormattedBudget(movie.budget.toString())}</p> : ''}
+            <p>{movie.overview}</p>
+            <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}`} alt="Movie poster" />
+            <button data-id={movie.id} onClick={buttonHandlers.details} type="button">Get Movie Details</button>
+            <button data-id={movie.id} onClick={buttonHandlers.recommended} type="button">See Recommended Movies</button>
+          </div>
+        )
+      })
+    } else {
+      return <p>No movies returned!</p>
+    }
   }
 
   return (

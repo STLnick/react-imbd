@@ -46,23 +46,28 @@ export const MovieSearch = () => {
     const searchText = searchInput.value
 
     if (searchText) {
-      // Call API with input value
-      const searchResponse = await api.index(searchText)
-      const searchedMovies = searchResponse.results
+      try {
+        // Call API with input value
+        const searchResponse = await api.index(searchText)
 
-      let filteredMovies
+        const searchedMovies = searchResponse.results
 
-      // Filter movies appropriately
-      if (checkboxInput.checked) {
-        filteredMovies = searchedMovies
-          .filter(movie => movie.release_date ? Number(movie.release_date.slice(0, 4)) < numberInput.value : Number(new Date().toDateString().slice(0, 4)) < numberInput.value)
-      } else {
-        filteredMovies = searchedMovies
+        let filteredMovies
+
+        // Filter movies appropriately
+        if (checkboxInput.checked) {
+          filteredMovies = searchedMovies
+            .filter(movie => movie.release_date ? Number(movie.release_date.slice(0, 4)) < numberInput.value : Number(new Date().toDateString().slice(0, 4)) < numberInput.value)
+        } else {
+          filteredMovies = searchedMovies
+        }
+
+        // Set movies with API response
+        setMovies(filteredMovies)
+
+      } catch (error) {
+        console.log(error)
       }
-
-      // Set movies with API response
-      setMovies(filteredMovies)
-
       // Reset search input
       searchInput.value = ''
     } else {
