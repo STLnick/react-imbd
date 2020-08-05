@@ -14,9 +14,7 @@ export const MovieSearch = () => {
 
     const searchResponse = await api.details(e.target.dataset.id)
 
-    console.log(searchResponse)
-
-    setMovies([searchResponse.results])
+    setMovies([searchResponse])
   }
 
   const handleRecommendedMoviesClick = async (e) => {
