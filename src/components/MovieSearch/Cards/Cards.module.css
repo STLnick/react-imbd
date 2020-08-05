@@ -1,4 +1,4 @@
-.cards-container {
+.cardsContainer {
   width: 100%;
 }
 
@@ -15,19 +15,19 @@
   width: 50%;
 }
 
-.card > h2 {
+.title {
   color: #444;
   font-size: 32px;
   text-shadow: 0 0 4px green;
 }
 
-.card blockquote {
+.blockquote {
   background-color: #ddd;
   font-weight: 700;
   padding: 1rem;
 }
 
-.card blockquote::before,
-.card blockquote::after {
+.blockquote::before,
+.blockquote::after {
   content: '"';
 }
