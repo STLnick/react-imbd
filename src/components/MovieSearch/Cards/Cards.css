@@ -20,3 +20,14 @@
   font-size: 32px;
   text-shadow: 0 0 4px green;
 }
+
+.card blockquote {
+  background-color: #ddd;
+  font-weight: 700;
+  padding: 1rem;
+}
+
+.card blockquote::before,
+.card blockquote::after {
+  content: '"';
+}
