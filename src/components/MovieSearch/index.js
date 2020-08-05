@@ -5,29 +5,59 @@ import api from 'api'
 import { Cards } from './Cards'
 import { Form } from './Form'
 
+import './MovieSearch.css'
+
 export const MovieSearch = () => {
   const [movies, setMovies] = useState([])
 
+  const hideError = () => {
+    document.querySelector('.error').innerHTML = ''
+    document.querySelector('.error').classList.remove('active-error')
+  }
+
+  const showError = (err) => {
+    document.querySelector('.error').innerHTML = `<h3>${err}</h3>`
+    document.querySelector('.error').classList.add('active-error')
+  }
+
   const handleDetailsClick = async (e) => {
-    console.log('DETAILS CLICK')
-    console.log(e.target.dataset.id)
+    try {
+      console.log('DETAILS CLICK')
+      console.log(e.target.dataset.id)
 
-    const searchResponse = await api.details(e.target.dataset.id)
+      const searchResponse = await api.details(e.target.dataset.id)
 
-    setMovies([searchResponse])
+      setMovies([searchResponse])
+
+      hideError()
+    } catch {
+      showError()
+    }
   }
 
   const handleRecommendedMoviesClick = async (e) => {
-    const movieID = e.target.dataset.id
-    const searchResponse = await api.recommended(movieID)
+    try {
+      const movieID = e.target.dataset.id
+      const searchResponse = await api.recommended(movieID)
 
-    setMovies(searchResponse.results)
+      setMovies(searchResponse.results)
+
+      hideError()
+    } catch {
+      showError()
+    }
   }
 
   const handleUpcomingMoviesClick = async () => {
-    const searchResponse = await api.upcoming()
+    try {
+      const searchResponse = await api.upcoming()
 
-    setMovies(searchResponse.results)
+      setMovies(searchResponse.results)
+
+      hideError()
+    } catch (error) {
+      showError(error)
+    }
   }
 
   const handleCheckboxChange = (e) => {
@@ -65,8 +95,9 @@ export const MovieSearch = () => {
         // Set movies with API response
         setMovies(filteredMovies)
 
+        hideError()
       } catch (error) {
-        console.log(error)
+        showError()
       }
       // Reset search input
       searchInput.value = ''
@@ -79,6 +110,7 @@ export const MovieSearch = () => {
   return (
     <main>
       <Form handlers={{ submit: handleSubmit, checked: handleCheckboxChange, upcoming: handleUpcomingMoviesClick }} />
+      <div className="error"></div>
       <Cards
         buttonHandlers={{ recommended: handleRecommendedMoviesClick, details: handleDetailsClick }}
         movies={movies}
