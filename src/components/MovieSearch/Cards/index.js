@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './Cards.css'
+import styles from './Cards.module.css'
 
 export const Cards = ({ buttonHandlers, movies }) => {
 
