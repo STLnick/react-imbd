@@ -40,9 +40,9 @@ export const Cards = ({ buttonHandlers, movies }) => {
       return movies.map(movie => {
 
         return (
-          <div key={movie.id} className="card flex flex--column flex--align-center flex--justify-evenly">
-            <h2>{movie.title}</h2>
-            {movie.tagline ? <blockquote>{movie.tagline}</blockquote> : ''}
+          <div key={movie.id} className={`${styles.card} flex flex--column flex--align-center flex--justify-evenly`}>
+            <h2 className={styles.title}>{movie.title}</h2>
+            {movie.tagline ? <blockquote className={styles.blockquote}>{movie.tagline}</blockquote> : ''}
             <p><strong>Released:</strong> {movie.release_date ? movie.release_date : 'TBD'}</p>
             {movie.budget ? <p><strong>Budget:</strong> {getFormattedBudget(movie.budget.toString())}</p> : ''}
             <p>{movie.overview}</p>
@@ -58,7 +58,7 @@ export const Cards = ({ buttonHandlers, movies }) => {
   }
 
   return (
-    <div className="cards-container flex flex--wrap flex--justify-evenly">
+    <div className={`${styles.cardsContainer} flex flex--wrap flex--justify-evenly`}>
       {renderCards()}
     </div>
   )
