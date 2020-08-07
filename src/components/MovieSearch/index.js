@@ -22,9 +22,6 @@ export const MovieSearch = () => {
 
   const handleDetailsClick = async (e) => {
     try {
-      console.log('DETAILS CLICK')
-      console.log(e.target.dataset.id)
-
       const searchResponse = await api.details(e.target.dataset.id)
 
       setMovies([searchResponse])
