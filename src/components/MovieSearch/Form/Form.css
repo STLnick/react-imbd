@@ -103,6 +103,10 @@ button[type="button"] {
   background-color: #ccc;
 }
 
+.checkmark-container input:focus + .checkmark {
+  box-shadow: 0 0 2px 2px green;
+}
+
 /* When the checkbox is checked, add a blue background */
 .checkmark-container input:checked ~ .checkmark {
   background-color: darkgreen;
