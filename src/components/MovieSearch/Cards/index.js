@@ -38,6 +38,8 @@ export const Cards = ({ buttonHandlers, movies }) => {
   const renderCards = () => {
     if (movies) {
       return movies.map(movie => {
+        // movie.budget is present when on details page - using this as a check
+        // Only render details button when NOT on details page
 
         return (
           <div key={movie.id} className={`${styles.card} flex flex--column flex--align-center flex--justify-evenly`}>
