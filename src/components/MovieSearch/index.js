@@ -63,11 +63,29 @@ export const MovieSearch = () => {
     numberInputs.forEach(input => e.target.checked ? input.disabled = false : input.disabled = true)
   }
 
+  const filterMovies = (checked, moviesResponse) => {
+    // IF there is input convert to number and return it
+    // ELSE set a very small year for minYear or very large year for maxYear
+    const minYear = document.querySelector('#min-year').value ? Number(document.querySelector('#min-year').value) : 0
+    const maxYear = document.querySelector('#max-year').value ? Number(document.querySelector('#max-year').value) : 3000
+
+    if (checked) {
+      return moviesResponse
+        .filter(movie => movie.release_date ?
+          Number(movie.release_date.slice(0, 4)) < maxYear :
+          Number(new Date().toDateString().slice(0, 4)) < maxYear)
+        .filter(movie => movie.release_date ?
+          Number(movie.release_date.slice(0, 4)) > minYear :
+          Number(new Date().toDateString().slice(0, 4)) > minYear)
+    }
+
+    return moviesResponse
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     // Grab input fields
     const searchInput = e.target.querySelector('input[type="search"]')
-    const numberInput = e.target.querySelector('input[type="number"]')
     const checkboxInput = e.target.querySelector('input[type="checkbox"]')
 
     // Get value from search input field
@@ -80,15 +98,7 @@ export const MovieSearch = () => {
 
         const searchedMovies = searchResponse.results
 
-        let filteredMovies
-
-        // Filter movies appropriately
-        if (checkboxInput.checked) {
-          filteredMovies = searchedMovies
-            .filter(movie => movie.release_date ? Number(movie.release_date.slice(0, 4)) < numberInput.value : Number(new Date().toDateString().slice(0, 4)) < numberInput.value)
-        } else {
-          filteredMovies = searchedMovies
-        }
+        const filteredMovies = filterMovies(checkboxInput.checked, searchedMovies)
 
         // Set movies with API response
         setMovies(filteredMovies)
