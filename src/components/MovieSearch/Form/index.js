@@ -13,7 +13,9 @@ export const Form = ({ handlers }) => {
       </div>
 
       <div className="flex flex--justify-center flex--align-center">
+        <label htmlFor="min-year" className="screen-reader-text">Minimum Release Year</label>
         <input disabled type="number" id="min-year" placeholder="Min Year" />
+        <label htmlFor="max-year" className="screen-reader-text">Maximum Release Year</label>
         <input disabled type="number" id="max-year" placeholder="Max Year" />
       </div>
       <div className="flex flex--justify-center flex--align-center">
