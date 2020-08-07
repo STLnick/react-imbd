@@ -46,7 +46,11 @@ export const Cards = ({ buttonHandlers, movies }) => {
             <h2 className={styles.title}>{movie.title}</h2>
             {movie.tagline ? <blockquote className={styles.blockquote}>{movie.tagline}</blockquote> : ''}
             <p><strong>Released:</strong> {movie.release_date ? movie.release_date : 'TBD'}</p>
-            {movie.budget ? <p><strong>Budget:</strong> {getFormattedBudget(movie.budget.toString())}</p> : ''}
+
+            {movie.budget ? <p><strong>Budget:</strong> {getFormattedNumber(movie.budget.toString())}</p> : ''}
+
+            {movie.revenue ? <p><strong>Revenue:</strong> {getFormattedNumber(movie.revenue.toString())}</p> : ''}
+
             <p>{movie.overview}</p>
             <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}`} alt="Movie poster" />
             <button data-id={movie.id} onClick={buttonHandlers.details} type="button">Get Movie Details</button>
