@@ -12,6 +12,12 @@ body {
   height: 100%;
 }
 
+.screen-reader-text {
+  left: -99999px;
+  position: absolute;
+  top: -99999px;
+}
+
 .flex {
   display: flex;
 }

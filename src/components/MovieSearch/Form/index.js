@@ -11,9 +11,15 @@ export const Form = ({ handlers }) => {
         <input type="search" placeholder="Find Movies..." />
         <button type="submit">Search</button>
       </div>
-      <input disabled type="number" placeholder="Release Year" />
+
       <div className="flex flex--justify-center flex--align-center">
-        <label htmlFor="year-filter">Show Movies up to entered year only</label>
+        <label htmlFor="min-year" className="screen-reader-text">Minimum Release Year</label>
+        <input disabled type="number" id="min-year" placeholder="Min Year" />
+        <label htmlFor="max-year" className="screen-reader-text">Maximum Release Year</label>
+        <input disabled type="number" id="max-year" placeholder="Max Year" />
+      </div>
+      <div className="flex flex--justify-center flex--align-center">
+        <label htmlFor="year-filter">Filter Movies by Release Year</label>
         <input id="year-filter" onChange={handlers.checked} type="checkbox" />
       </div>
       <button type="button" onClick={handlers.upcoming}>See Upcoming Movies</button>
