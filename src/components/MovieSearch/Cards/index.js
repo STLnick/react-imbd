@@ -39,7 +39,7 @@ export const Cards = ({ buttonHandlers, movies }) => {
     if (movies) {
       return movies.map(movie => {
         // movie.budget is present when on details page - using this as a check
-        const isDetailsDisplay = movie.budget ? true : false
+        const isDetailsDisplay = movie.budget !== undefined ? true : false
         let budget, detailsButton, rating, revenue, tagline
 
         if (isDetailsDisplay) {
