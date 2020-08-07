@@ -123,7 +123,6 @@ export const MovieSearch = () => {
         buttonHandlers={{ recommended: handleRecommendedMoviesClick, details: handleDetailsClick }}
         movies={movies}
       />
-      <div className="spacer"></div>
     </main>
   )
 }
