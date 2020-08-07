@@ -33,6 +33,12 @@ input[type="number"]:disabled {
   opacity: 0.5;
 }
 
+input[type="number"]:disabled:focus,
+input[type="number"]:disabled:hover {
+  border-color: #aaa;
+  box-shadow: none;
+}
+
 button {
   border: none;
   border-radius: 5px;
