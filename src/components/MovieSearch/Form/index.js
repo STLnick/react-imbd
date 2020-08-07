@@ -11,7 +11,7 @@ export const Form = ({ handlers }) => {
         <input type="search" placeholder="Find Movies..." />
         <button type="submit">Search</button>
       </div>
-      <input disabled type="number" placeholder="Release Year..." />
+      <input disabled type="number" placeholder="Release Year" />
       <div className="flex flex--justify-center flex--align-center">
         <label htmlFor="year-filter">Show Movies up to entered year only</label>
         <input id="year-filter" onChange={handlers.checked} type="checkbox" />
