@@ -40,6 +40,7 @@ export const Cards = ({ buttonHandlers, movies }) => {
       return movies.map(movie => {
         // movie.budget is present when on details page - using this as a check
         // Only render details button when NOT on details page
+        const detailsButton = movie.budget ? '' : <button data-id={movie.id} onClick={buttonHandlers.details} type="button">Get Movie Details</button>
 
         return (
           <div key={movie.id} className={`${styles.card} flex flex--column flex--align-center flex--justify-evenly`}>
@@ -54,6 +55,7 @@ export const Cards = ({ buttonHandlers, movies }) => {
             <p>{movie.overview}</p>
             <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}`} alt="Movie poster" />
             <button data-id={movie.id} onClick={buttonHandlers.details} type="button">Get Movie Details</button>
+            {detailsButton}
             <button data-id={movie.id} onClick={buttonHandlers.recommended} type="button">See Recommended Movies</button>
           </div>
         )
