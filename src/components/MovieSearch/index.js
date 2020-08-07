@@ -58,8 +58,9 @@ export const MovieSearch = () => {
   }
 
   const handleCheckboxChange = (e) => {
-    const numberInput = document.querySelector('input[type="number"]')
-    e.target.checked ? numberInput.disabled = false : numberInput.disabled = true
+    const numberInputs = Array.from(document.querySelectorAll('input[type="number"]'))
+
+    numberInputs.forEach(input => e.target.checked ? input.disabled = false : input.disabled = true)
   }
 
   const handleSubmit = async (e) => {
