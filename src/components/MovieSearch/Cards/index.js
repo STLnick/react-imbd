@@ -5,7 +5,7 @@ import styles from './Cards.module.css'
 
 export const Cards = ({ buttonHandlers, movies }) => {
 
-  const getFormattedBudget = (budget) => {
+  const getFormattedNumber = (budget) => {
     let formattedBudget = '$'
 
     const chunksOfThree = Math.floor(budget.length / 3)
