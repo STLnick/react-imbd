@@ -1,12 +1,23 @@
 form {
   border: 2px solid darkgreen;
+  border-radius: 5px;
   padding: 0.5rem;
 }
 
 input {
+  background-color: #eee;
+  border: 2px solid gold;
   border-radius: 5px;
   margin: 1rem;
+  outline: none;
   padding: 0.5rem;
+  transition: border, box-shadow 0.4s;
+}
+
+input:focus,
+input:hover {
+  border-color: darkgreen;
+  box-shadow: 0 0 3px 3px darkgreen;
 }
 
 input[type="search"] {
