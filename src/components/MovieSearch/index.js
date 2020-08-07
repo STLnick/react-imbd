@@ -111,7 +111,7 @@ export const MovieSearch = () => {
       searchInput.value = ''
     } else {
       // Reset search input
-      searchInput.value = 'Need to enter a movie!'
+      searchInput.placeholder = 'Enter a movie!'
     }
   }
 
