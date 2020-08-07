@@ -39,28 +39,46 @@ export const Cards = ({ buttonHandlers, movies }) => {
     if (movies) {
       return movies.map(movie => {
         // movie.budget is present when on details page - using this as a check
-        // Only render details button when NOT on details page
-        const detailsButton = movie.budget ? '' : <button data-id={movie.id} onClick={buttonHandlers.details} type="button">Get Movie Details</button>
+        const isDetailsDisplay = movie.budget ? true : false
+        let budget, detailsButton, rating, revenue, tagline
+
+        if (isDetailsDisplay) {
+          detailsButton = ''
+
+          budget = <p><strong>Budget:</strong> {getFormattedNumber(movie.budget.toString())}</p>
+          rating = <p><strong>IMDB Average Rating:</strong> {movie.vote_average} </p>
+          revenue = <p><strong>Revenue:</strong> {getFormattedNumber(movie.revenue.toString())}</p>
+          tagline = <blockquote className={styles.blockquote}>{movie.tagline}</blockquote>
+        } else {
+          detailsButton = <button button data-id={movie.id} onClick={buttonHandlers.details} type="button">Get Movie Details</button>
+
+          budget = ''
+          rating = ''
+          revenue = ''
+          tagline = ''
+        }
+
 
         return (
           <div key={movie.id} className={`${styles.card} flex flex--column flex--align-center flex--justify-evenly`}>
             <h2 className={styles.title}>{movie.title}</h2>
 
-            {movie.tagline ? <blockquote className={styles.blockquote}>{movie.tagline}</blockquote> : ''}
+            {tagline}
 
             <p><strong>Released:</strong> {movie.release_date ? movie.release_date : 'TBD'}</p>
 
-            {movie.budget ? <p><strong>Budget:</strong> {getFormattedNumber(movie.budget.toString())}</p> : ''}
+            {budget}
 
-            {movie.revenue ? <p><strong>Revenue:</strong> {getFormattedNumber(movie.revenue.toString())}</p> : ''}
+            {revenue}
 
             <p>{movie.overview}</p>
 
             <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}`} alt="Movie poster" />
 
-            {movie.budget ? <p><strong>IMDB Average Rating:</strong> {movie.vote_average}</p> : ''}
+            {rating}
 
             {detailsButton}
+
             <button data-id={movie.id} onClick={buttonHandlers.recommended} type="button">See Recommended Movies</button>
           </div>
         )
