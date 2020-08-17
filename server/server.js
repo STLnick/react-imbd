@@ -30,6 +30,14 @@ const server = http.createServer(async (req, res) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.end(data.body);
       break;
+    case '/upcoming':
+      data = await got(`${process.env.BASE_URL}/movie/upcoming?api_key=${process.env.API_KEY}&language=en-US&page=1`);
+
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'text/JSON');
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.end(data.body);
+      break;
     default:
       res.statusCode = 404;
       res.setHeader('Content-Type', 'text/html');

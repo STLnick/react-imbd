@@ -34,7 +34,7 @@ export default (
 
   async upcoming() {
     try {
-      const res = await fetch(`${baseUrl}/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`)
+      const res = await fetch(`${baseUrl}/upcoming`)
 
       return await res.json()
     } catch (error) {
