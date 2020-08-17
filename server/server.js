@@ -1,7 +1,5 @@
 import dotenv from 'dotenv';
-import { promises as fs } from 'fs';
 import http from 'http';
-import url from 'url';
 import got from 'got';
 
 dotenv.config();
