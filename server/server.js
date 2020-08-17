@@ -1,19 +1,19 @@
 import dotenv from 'dotenv';
 import http from 'http';
 import got from 'got';
+import querystring from 'querystring';
 
 dotenv.config();
 const port = 5000;
 
 const server = http.createServer(async (req, res) => {
-  const [path, query] = req.url.split('?');
-  let data; let
-    id;
+  const [path, _] = req.url.split('?');
+  const query = querystring.parse(req.url.slice(req.url.indexOf('?') + 1));
+  let data;
 
   switch (path) {
     case '/':
-      const queryText = url.parse(req.url).query.split('=')[1];
-      data = await got(`${process.env.BASE_URL}/search/movie?api_key=${process.env.API_KEY}&query=${queryText}&page=1&include_adult=false`);
+      data = await got(`${process.env.BASE_URL}/search/movie?api_key=${process.env.API_KEY}&query=${query.query}&page=1&include_adult=false`);
 
       res.statusCode = 200;
       res.setHeader('Content-Type', 'text/JSON');
@@ -21,8 +21,7 @@ const server = http.createServer(async (req, res) => {
       res.end(data.body);
       break;
     case '/details':
-      id = query.split('=')[1];
-      data = await got(`${process.env.BASE_URL}/movie/${id}?api_key=${process.env.API_KEY}&language=en-US`);
+      data = await got(`${process.env.BASE_URL}/movie/${query.id}?api_key=${process.env.API_KEY}&language=en-US`);
 
       res.statusCode = 200;
       res.setHeader('Content-Type', 'text/JSON');
@@ -38,8 +37,7 @@ const server = http.createServer(async (req, res) => {
       res.end(data.body);
       break;
     case '/recommended':
-      id = query.split('=')[1];
-      data = await got(`${process.env.BASE_URL}/movie/${id}/recommendations?api_key=${process.env.API_KEY}&language=en-US&page=1`);
+      data = await got(`${process.env.BASE_URL}/movie/${query.id}/recommendations?api_key=${process.env.API_KEY}&language=en-US&page=1`);
 
       res.statusCode = 200;
       res.setHeader('Content-Type', 'text/JSON');
