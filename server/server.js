@@ -1,33 +1,23 @@
+import dotenv from 'dotenv';
 import { promises as fs } from 'fs';
 import http from 'http';
 import url from 'url';
 import got from 'got';
 
+dotenv.config();
 const port = 5000;
 
-const serveFile = async (inputUrl) => {
-  console.log(inputUrl);
-  const file = await fs.readFile(`.${inputUrl}`, 'utf-8');
-  return file;
-};
-
-const serveJSON = async () => {
-  const { body } = await got('https://jsonplaceholder.typicode.com/todos');
-  return body;
-};
-
 const server = http.createServer(async (req, res) => {
+  const queryText = url.parse(req.url).query.split('=')[1];
+  const { body } = await got(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${queryText}&page=1&include_adult=false`);
   res.statusCode = 200;
-
-  if (req.url === '/site/index.html') {
-    res.setHeader('Content-Type', 'text/html');
-    res.end(await serveFile(req.url));
-  } else if (req.url === '/site/todos') {
-    res.setHeader('Content-Type', 'text/html');
-    res.end(await serveJSON());
-  }
+  res.setHeader('Content-Type', 'text/JSON');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.end(body);
 });
 
 server.listen(port, '127.0.0.1', () => {
-  console.log('server is listening!');
+  console.log(`server is listening on port ${port}!`);
 });
+
+// /search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${query}&page=1&include_adult=false`
