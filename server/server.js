@@ -9,7 +9,8 @@ const port = 5000;
 
 const server = http.createServer(async (req, res) => {
   const [path, query] = req.url.split('?');
-  let data;
+  let data; let
+    id;
 
   switch (path) {
     case '/':
@@ -22,7 +23,7 @@ const server = http.createServer(async (req, res) => {
       res.end(data.body);
       break;
     case '/details':
-      const id = url.parse(req.url).query.split('=')[1];
+      id = query.split('=')[1];
       data = await got(`${process.env.BASE_URL}/movie/${id}?api_key=${process.env.API_KEY}&language=en-US`);
 
       res.statusCode = 200;
@@ -32,6 +33,15 @@ const server = http.createServer(async (req, res) => {
       break;
     case '/upcoming':
       data = await got(`${process.env.BASE_URL}/movie/upcoming?api_key=${process.env.API_KEY}&language=en-US&page=1`);
+
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'text/JSON');
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.end(data.body);
+      break;
+    case '/recommended':
+      id = query.split('=')[1];
+      data = await got(`${process.env.BASE_URL}/movie/${id}/recommendations?api_key=${process.env.API_KEY}&language=en-US&page=1`);
 
       res.statusCode = 200;
       res.setHeader('Content-Type', 'text/JSON');

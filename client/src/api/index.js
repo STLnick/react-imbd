@@ -44,7 +44,7 @@ export default (
 
   async recommended(id) {
     try {
-      const res = await fetch(`${baseUrl}/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`)
+      const res = await fetch(`${baseUrl}/recommended?id=${id}`)
 
       return await res.json()
     } catch (error) {
