@@ -22,7 +22,8 @@ export default (
   // TODO: Convert functions below to send info to server and let server do the actual fetch
   async details(id) {
     try {
-      const res = await fetch(`${baseUrl}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
+      const res = await fetch(`${baseUrl}/details?id=${id}`)
+      // const res = await fetch(`${baseUrl}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
 
       return await res.json()
     } catch (error) {
