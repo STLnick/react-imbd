@@ -7,6 +7,8 @@ import { Form } from './Form'
 
 import './MovieSearch.css'
 
+const moviesRepo = api()
+
 export const MovieSearch = () => {
   const [movies, setMovies] = useState([])
 
@@ -22,7 +24,7 @@ export const MovieSearch = () => {
 
   const handleDetailsClick = async (e) => {
     try {
-      const searchResponse = await api.details(e.target.dataset.id)
+      const searchResponse = await moviesRepo.details(e.target.dataset.id)
 
       setMovies([searchResponse])
 
@@ -35,7 +37,7 @@ export const MovieSearch = () => {
   const handleRecommendedMoviesClick = async (e) => {
     try {
       const movieID = e.target.dataset.id
-      const searchResponse = await api.recommended(movieID)
+      const searchResponse = await moviesRepo.recommended(movieID)
 
       setMovies(searchResponse.results)
 
@@ -47,7 +49,7 @@ export const MovieSearch = () => {
 
   const handleUpcomingMoviesClick = async () => {
     try {
-      const searchResponse = await api.upcoming()
+      const searchResponse = await moviesRepo.upcoming()
 
       setMovies(searchResponse.results)
 
@@ -94,7 +96,7 @@ export const MovieSearch = () => {
     if (searchText) {
       try {
         // Call API with input value
-        const searchResponse = await api.index(searchText)
+        const searchResponse = await moviesRepo.index(searchText)
 
         const searchedMovies = searchResponse.results
 
