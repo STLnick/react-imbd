@@ -5,7 +5,6 @@ dotenv.config()
 export default (
   baseUrl = `http://localhost:${process.env.REACT_APP_PORT}`
 ) => ({
-
   async index(query) {
     try {
       const res = await fetch(`${baseUrl}?query=${query}`)
@@ -19,7 +18,6 @@ export default (
       console.log(`Currently facing issue with ${error.message}`)
     }
   },
-  // TODO: Convert functions below to send info to server and let server do the actual fetch
   async details(id) {
     try {
       const res = await fetch(`${baseUrl}/details?id=${id}`)
@@ -31,7 +29,6 @@ export default (
     }
 
   },
-
   async upcoming() {
     try {
       const res = await fetch(`${baseUrl}/upcoming`)
@@ -41,7 +38,6 @@ export default (
       console.log(`Currently facing issue with ${error.message}`)
     }
   },
-
   async recommended(id) {
     try {
       const res = await fetch(`${baseUrl}/recommended?id=${id}`)
