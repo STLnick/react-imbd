@@ -9,15 +9,16 @@ import './App.css';
 export const App = () => {
   return (
     <div className="page-container flex flex--column flex--align-center flex--justify-center">
-      <MovieSearch />
       <Switch>
         <Route exact path='/'>
           <Home />
         </Route>
         <Route path='/movies'>
+          <Header />
           <Movies />
         </Route>
         <Route path='/TV'>
+          <Header />
           <TV />
         </Route>
       </Switch>
