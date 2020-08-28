@@ -1,5 +1,16 @@
 @import-normalize; /* bring in normalize.css styles */
 
+:root {
+  --primary: rgb(0, 128, 0);
+  --primary-dark: rgb(0, 87, 0);
+  --secondary: rgb(255, 215, 0);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -8,6 +19,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
+a {
+  text-decoration: none;
+}
+
+.logo {
+  margin-right: 1rem;
+  width: 25px;
+}
+
+.title {
+  color: #616161;
+}
+
+.button {
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+  color: var(--primary);
+  font-size: 14px;
+  padding: 0.25rem 0.5rem;
+}
+
+.primary-bg {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* Trash??? */
 .spacer {
   height: 100%;
 }
@@ -17,6 +57,8 @@ body {
   position: absolute;
   top: -99999px;
 }
+
+/* Flex Classes */
 
 .flex {
   display: flex;
@@ -30,6 +72,10 @@ body {
   align-items: center;
 }
 
+.flex--justify-between {
+  justify-content: space-between;
+}
+
 .flex--justify-center {
   justify-content: center;
 }
@@ -40,4 +86,22 @@ body {
 
 .flex--wrap {
   flex-wrap: wrap;
+}
+
+/* SVG Color Filters */
+
+.filter-white {
+  filter: invert(100%) sepia(1%) saturate(7495%) hue-rotate(85deg) brightness(115%) contrast(108%);
+}
+
+.filter-primary {
+  filter: invert(18%) sepia(81%) saturate(4585%) hue-rotate(120deg) brightness(94%) contrast(107%);
+}
+
+.filter-primary-dark {
+  filter: invert(18%) sepia(28%) saturate(5927%) hue-rotate(101deg) brightness(96%) contrast(105%);
+}
+
+.filter-secondary {
+  filter: invert(79%) sepia(33%) saturate(1438%) hue-rotate(359deg) brightness(103%) contrast(106%)
 }

@@ -2,3 +2,23 @@
   min-height: 100vh;
   width: 100vw;
 }
+
+.button-svg {
+  margin-right: 0.5rem;
+  width: 20px;
+}
+
+.top-nav {
+  background-color: #f1f1f1;
+  border-bottom: 1px solid var(--primary);
+  padding: 0.75rem 0;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.nav-left,
+.nav-right {
+  padding: 0 2rem;
+}
