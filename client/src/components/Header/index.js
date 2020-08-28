@@ -20,7 +20,7 @@ export const Header = () => {
             <img className="button-svg filter-white" src={tvIcon} alt="TV icon" />
             Search TV Shows
           </Link>
-          : <Link className="button primary-bg" to='/movies'>
+          : <Link className="flex flex--align-center button primary-bg" to='/movies'>
             <img className="button-svg filter-white" src={filmIcon} alt="Film icon" />
             Search Movies
           </Link>}
