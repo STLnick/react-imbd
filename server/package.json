@@ -13,7 +13,7 @@
     "Express",
     "Node"
   ],
-  "author": "Manav Misra",
+  "author": "Nick Ray",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
