@@ -12,12 +12,12 @@ export const Form = ({ handlers }) => {
       <h3 className="title">
         {location.pathname === '/movies' ? 'Movies' : 'TV Shows'}
       </h3>
-      <div className="flex">
+      <div className="form-group flex">
         <input type="search" placeholder={location.pathname === '/movies' ? 'Find Movies...' : 'Find TV Shows...'} />
         <button type="submit">Search</button>
       </div>
 
-      <div className="flex flex--justify-center flex--align-center">
+      <div className="form-group flex flex--justify-center flex--align-center">
         <label htmlFor="min-year" className="screen-reader-text">Minimum Release Year</label>
         <input disabled type="number" id="min-year" placeholder="Min Year" />
         <label htmlFor="max-year" className="screen-reader-text">Maximum Release Year</label>

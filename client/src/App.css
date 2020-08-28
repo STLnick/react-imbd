@@ -22,3 +22,11 @@
 .nav-right {
   padding: 0 2rem;
 }
+
+form > * {
+  margin: 0.5rem;
+}
+
+.form-group > input:first-of-type {
+  margin-right: 0.5rem;
+}
