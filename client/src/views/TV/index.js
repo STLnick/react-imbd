@@ -1,3 +1,9 @@
 import React from 'react'
+import api from 'api'
 
-export const TV = () => <h2>TV Shows Search</h2>
+import { MovieSearch } from '../../components'
+
+export const TV = () => {
+  const repo = api.tv()
+  return <MovieSearch repo={repo} />
+}
