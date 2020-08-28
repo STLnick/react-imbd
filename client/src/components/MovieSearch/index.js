@@ -7,7 +7,7 @@ import { Form } from './Form'
 
 import './MovieSearch.css'
 
-const moviesRepo = api()
+const moviesRepo = api.movies()
 
 export const MovieSearch = () => {
   const [movies, setMovies] = useState([])
