@@ -7,7 +7,7 @@ export default (
 ) => ({
   async index(query) {
     try {
-      const res = await fetch(`${baseUrl}?query=${query}`)
+      const res = await fetch(`${baseUrl}/movie?query=${query}`)
 
       if (res.status > 400) {
         throw new Error(res.status)
@@ -20,7 +20,7 @@ export default (
   },
   async details(id) {
     try {
-      const res = await fetch(`${baseUrl}/details?id=${id}`)
+      const res = await fetch(`${baseUrl}/movie/details?id=${id}`)
       // const res = await fetch(`${baseUrl}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
 
       return await res.json()
@@ -31,7 +31,7 @@ export default (
   },
   async upcoming() {
     try {
-      const res = await fetch(`${baseUrl}/upcoming`)
+      const res = await fetch(`${baseUrl}/movie/upcoming`)
 
       return await res.json()
     } catch (error) {
@@ -40,7 +40,7 @@ export default (
   },
   async recommended(id) {
     try {
-      const res = await fetch(`${baseUrl}/recommended?id=${id}`)
+      const res = await fetch(`${baseUrl}/movie/recommended?id=${id}`)
 
       return await res.json()
     } catch (error) {
