@@ -1,2 +1,2 @@
 export { Header } from './Header'
-export { MovieSearch } from './MovieSearch'
+export { MediaSearch } from './MediaSearch'

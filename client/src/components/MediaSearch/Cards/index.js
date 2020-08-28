@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import styles from './Cards.module.css'
 
-export const Cards = ({ buttonHandlers, movies }) => {
+export const Cards = ({ buttonHandlers, media }) => {
   const location = useLocation()
 
   const getFormattedNumber = (budget) => {
@@ -38,22 +38,22 @@ export const Cards = ({ buttonHandlers, movies }) => {
   }
 
   const renderCards = () => {
-    if (movies) {
-      return movies.map(movie => {
+    if (media) {
+      return media.map(media => {
         // movie.budget is present when on details page - using this as a check
-        const isDetailsDisplay = movie.budget !== undefined ? true : false
+        const isDetailsDisplay = media.budget !== undefined ? true : false
         let budget, detailsButton, rating, release, revenue, tagline
 
         if (isDetailsDisplay) {
           detailsButton = ''
 
-          budget = <p><strong>Budget:</strong> {getFormattedNumber(movie.budget.toString())}</p>
-          rating = <p><strong>IMDB Average Rating:</strong> {movie.vote_average} </p>
-          revenue = <p><strong>Revenue:</strong> {getFormattedNumber(movie.revenue.toString())}</p>
-          tagline = <blockquote className={styles.blockquote}>{movie.tagline}</blockquote>
+          budget = <p><strong>Budget:</strong> {getFormattedNumber(media.budget.toString())}</p>
+          rating = <p><strong>IMDB Average Rating:</strong> {media.vote_average} </p>
+          revenue = <p><strong>Revenue:</strong> {getFormattedNumber(media.revenue.toString())}</p>
+          tagline = <blockquote className={styles.blockquote}>{media.tagline}</blockquote>
         } else {
           detailsButton = <button
-            button data-id={movie.id}
+            button data-id={media.id}
             onClick={buttonHandlers.details}
             type="button"
           >
@@ -66,18 +66,18 @@ export const Cards = ({ buttonHandlers, movies }) => {
           tagline = ''
         }
 
-        if (movie.release_date) {
-          release = <p><strong>Released:</strong> {movie.release_date}</p>
-        } else if (movie.first_air_date) {
-          release = <p><strong>First Aired:</strong> {movie.first_air_date}</p>
+        if (media.release_date) {
+          release = <p><strong>Released:</strong> {media.release_date}</p>
+        } else if (media.first_air_date) {
+          release = <p><strong>First Aired:</strong> {media.first_air_date}</p>
         } else {
           release = <p><strong>Released Date:</strong> TBD</p>
         }
 
 
         return (
-          <div key={movie.id} className={`${styles.card} flex flex--column flex--align-center flex--justify-evenly`}>
-            <h2 className={styles.title}>{movie.title}</h2>
+          <div key={media.id} className={`${styles.card} flex flex--column flex--align-center flex--justify-evenly`}>
+            <h2 className={styles.title}>{media.title}</h2>
 
             {tagline}
 
@@ -87,16 +87,16 @@ export const Cards = ({ buttonHandlers, movies }) => {
 
             {revenue}
 
-            <p>{movie.overview}</p>
+            <p>{media.overview}</p>
 
-            <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}`} alt="Movie poster" />
+            <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${media.poster_path}`} alt="Movie poster" />
 
             {rating}
 
             {detailsButton}
 
             <button
-              data-id={movie.id}
+              data-id={media.id}
               onClick={buttonHandlers.recommended}
               type="button"
             >
@@ -119,5 +119,5 @@ export const Cards = ({ buttonHandlers, movies }) => {
 
 Cards.propTypes = {
   buttonHandlers: PropTypes.object,
-  movies: PropTypes.array
+  media: PropTypes.array
 }

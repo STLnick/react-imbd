@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import { Cards } from './Cards'
 import { Form } from './Form'
 
-import './MovieSearch.css'
+import './MediaSearch.css'
 
-export const MovieSearch = ({ repo }) => {
-  const [movies, setMovies] = useState([])
+export const MediaSearch = ({ repo }) => {
+  const [media, setMedia] = useState([])
 
   const hideError = () => {
     document.querySelector('.error').innerHTML = ''
@@ -23,7 +23,7 @@ export const MovieSearch = ({ repo }) => {
     try {
       const searchResponse = await repo.details(e.target.dataset.id)
 
-      setMovies([searchResponse])
+      setMedia([searchResponse])
 
       hideError()
     } catch {
@@ -31,12 +31,12 @@ export const MovieSearch = ({ repo }) => {
     }
   }
 
-  const handleRecommendedMoviesClick = async (e) => {
+  const handleRecommendedClick = async (e) => {
     try {
-      const movieID = e.target.dataset.id
-      const searchResponse = await repo.recommended(movieID)
+      const mediaID = e.target.dataset.id
+      const searchResponse = await repo.recommended(mediaID)
 
-      setMovies(searchResponse.results)
+      setMedia(searchResponse.results)
 
       hideError()
     } catch {
@@ -44,11 +44,11 @@ export const MovieSearch = ({ repo }) => {
     }
   }
 
-  const handleUpcomingMoviesClick = async () => {
+  const handleUpcomingClick = async () => {
     try {
       const searchResponse = await repo.upcoming()
 
-      setMovies(searchResponse.results)
+      setMedia(searchResponse.results)
 
       hideError()
     } catch (error) {
@@ -62,23 +62,23 @@ export const MovieSearch = ({ repo }) => {
     numberInputs.forEach(input => e.target.checked ? input.disabled = false : input.disabled = true)
   }
 
-  const filterMovies = (checked, moviesResponse) => {
+  const filterMedia = (checked, mediaResponse) => {
     // IF there is input convert to number and return it
     // ELSE set a very small year for minYear or very large year for maxYear
     const minYear = document.querySelector('#min-year').value ? Number(document.querySelector('#min-year').value) : 0
     const maxYear = document.querySelector('#max-year').value ? Number(document.querySelector('#max-year').value) : 3000
 
     if (checked) {
-      return moviesResponse
-        .filter(movie => movie.release_date ?
-          Number(movie.release_date.slice(0, 4)) < maxYear :
+      return mediaResponse
+        .filter(media => media.release_date ?
+          Number(media.release_date.slice(0, 4)) < maxYear :
           Number(new Date().toDateString().slice(0, 4)) < maxYear)
-        .filter(movie => movie.release_date ?
-          Number(movie.release_date.slice(0, 4)) > minYear :
+        .filter(media => media.release_date ?
+          Number(media.release_date.slice(0, 4)) > minYear :
           Number(new Date().toDateString().slice(0, 4)) > minYear)
     }
 
-    return moviesResponse
+    return mediaResponse
   }
 
   const handleSubmit = async (e) => {
@@ -95,12 +95,12 @@ export const MovieSearch = ({ repo }) => {
         // Call API with input value
         const searchResponse = await repo.index(searchText)
 
-        const searchedMovies = searchResponse.results
+        const searchedMedia = searchResponse.results
 
-        const filteredMovies = filterMovies(checkboxInput.checked, searchedMovies)
+        const filteredMedia = filterMedia(checkboxInput.checked, searchedMedia)
 
         // Set movies with API response
-        setMovies(filteredMovies)
+        setMedia(filteredMedia)
 
         hideError()
       } catch (error) {
@@ -110,22 +110,22 @@ export const MovieSearch = ({ repo }) => {
       searchInput.value = ''
     } else {
       // Reset search input
-      searchInput.placeholder = 'Enter a movie!'
+      searchInput.placeholder = 'Enter a Title!'
     }
   }
 
   return (
     <main>
-      <Form handlers={{ submit: handleSubmit, checked: handleCheckboxChange, upcoming: handleUpcomingMoviesClick }} />
+      <Form handlers={{ submit: handleSubmit, checked: handleCheckboxChange, upcoming: handleUpcomingClick }} />
       <div className="error"></div>
       <Cards
-        buttonHandlers={{ recommended: handleRecommendedMoviesClick, details: handleDetailsClick }}
-        movies={movies}
+        buttonHandlers={{ recommended: handleRecommendedClick, details: handleDetailsClick }}
+        media={media}
       />
     </main>
   )
 }
 
-MovieSearch.propTypes = {
+MediaSearch.propTypes = {
   repo: PropTypes.object
 }
