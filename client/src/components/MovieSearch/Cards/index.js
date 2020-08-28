@@ -40,7 +40,7 @@ export const Cards = ({ buttonHandlers, movies }) => {
       return movies.map(movie => {
         // movie.budget is present when on details page - using this as a check
         const isDetailsDisplay = movie.budget !== undefined ? true : false
-        let budget, detailsButton, rating, revenue, tagline
+        let budget, detailsButton, rating, release, revenue, tagline
 
         if (isDetailsDisplay) {
           detailsButton = ''
@@ -58,6 +58,14 @@ export const Cards = ({ buttonHandlers, movies }) => {
           tagline = ''
         }
 
+        if (movie.release_date) {
+          release = <p><strong>Released:</strong> {movie.release_date}</p>
+        } else if (movie.first_air_date) {
+          release = <p><strong>First Aired:</strong> {movie.first_air_date}</p>
+        } else {
+          release = <p><strong>Released Date:</strong> TBD</p>
+        }
+
 
         return (
           <div key={movie.id} className={`${styles.card} flex flex--column flex--align-center flex--justify-evenly`}>
@@ -65,7 +73,7 @@ export const Cards = ({ buttonHandlers, movies }) => {
 
             {tagline}
 
-            <p><strong>Released:</strong> {movie.release_date ? movie.release_date : 'TBD'}</p>
+            {release}
 
             {budget}
 
