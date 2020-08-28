@@ -29,7 +29,9 @@ export const Form = ({ handlers }) => {
           <span className="checkmark"></span>
         </label>
       </div>
-      <button type="button" onClick={handlers.upcoming}>See Upcoming Movies</button>
+      <button type="button" onClick={handlers.upcoming}>
+        See Upcoming {location.pathname === '/movies' ? 'Movies' : 'TV Shows'}
+      </button>
     </form>
   )
 }

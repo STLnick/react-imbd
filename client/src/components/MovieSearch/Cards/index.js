@@ -1,9 +1,11 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import styles from './Cards.module.css'
 
 export const Cards = ({ buttonHandlers, movies }) => {
+  const location = useLocation()
 
   const getFormattedNumber = (budget) => {
     let formattedBudget = '$'
@@ -50,7 +52,13 @@ export const Cards = ({ buttonHandlers, movies }) => {
           revenue = <p><strong>Revenue:</strong> {getFormattedNumber(movie.revenue.toString())}</p>
           tagline = <blockquote className={styles.blockquote}>{movie.tagline}</blockquote>
         } else {
-          detailsButton = <button button data-id={movie.id} onClick={buttonHandlers.details} type="button">Get Movie Details</button>
+          detailsButton = <button
+            button data-id={movie.id}
+            onClick={buttonHandlers.details}
+            type="button"
+          >
+            Get {location.pathname === '/movies' ? 'Movie' : 'Show'} Details
+          </button>
 
           budget = ''
           rating = ''
@@ -87,12 +95,18 @@ export const Cards = ({ buttonHandlers, movies }) => {
 
             {detailsButton}
 
-            <button data-id={movie.id} onClick={buttonHandlers.recommended} type="button">See Recommended Movies</button>
+            <button
+              data-id={movie.id}
+              onClick={buttonHandlers.recommended}
+              type="button"
+            >
+              See Recommended {location.pathname === '/movies' ? 'Movies' : 'TV Shows'}
+            </button>
           </div>
         )
       })
     } else {
-      return <p>No movies returned!</p>
+      return <p>No results returned!</p>
     }
   }
 
