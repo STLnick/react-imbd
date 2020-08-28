@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
-
-import api from 'api'
+import PropTypes from 'prop-types'
 
 import { Cards } from './Cards'
 import { Form } from './Form'
 
 import './MovieSearch.css'
 
-const moviesRepo = api.movies()
-
-export const MovieSearch = () => {
+export const MovieSearch = ({ repo }) => {
   const [movies, setMovies] = useState([])
 
   const hideError = () => {
@@ -24,7 +21,7 @@ export const MovieSearch = () => {
 
   const handleDetailsClick = async (e) => {
     try {
-      const searchResponse = await moviesRepo.details(e.target.dataset.id)
+      const searchResponse = await repo.details(e.target.dataset.id)
 
       setMovies([searchResponse])
 
@@ -37,7 +34,7 @@ export const MovieSearch = () => {
   const handleRecommendedMoviesClick = async (e) => {
     try {
       const movieID = e.target.dataset.id
-      const searchResponse = await moviesRepo.recommended(movieID)
+      const searchResponse = await repo.recommended(movieID)
 
       setMovies(searchResponse.results)
 
@@ -49,7 +46,7 @@ export const MovieSearch = () => {
 
   const handleUpcomingMoviesClick = async () => {
     try {
-      const searchResponse = await moviesRepo.upcoming()
+      const searchResponse = await repo.upcoming()
 
       setMovies(searchResponse.results)
 
@@ -96,7 +93,7 @@ export const MovieSearch = () => {
     if (searchText) {
       try {
         // Call API with input value
-        const searchResponse = await moviesRepo.index(searchText)
+        const searchResponse = await repo.index(searchText)
 
         const searchedMovies = searchResponse.results
 
@@ -127,4 +124,8 @@ export const MovieSearch = () => {
       />
     </main>
   )
+}
+
+MovieSearch.propTypes = {
+  repo: PropTypes.object
 }
