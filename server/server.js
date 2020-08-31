@@ -13,7 +13,9 @@ app.use(cors());
 app.use(express.json());
 
 // test
-app.get('/', () => '<h1>Hello from server!</h1>');
+app.get('/', () => {
+  res.status(200).send('<h1>Hello from server!</h1>');
+}
 
 app.use('/movie', movie);
 app.use('/tv', tv);
