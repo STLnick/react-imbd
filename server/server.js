@@ -12,6 +12,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// test
+app.get('/', (req, res) => {
+  res.status(200).send('<h1>Hello from server!</h1>');
+});
+
 app.use('/movie', movie);
 app.use('/tv', tv);
 
