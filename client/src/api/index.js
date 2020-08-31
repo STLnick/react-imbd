@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export default {
-  movies: (baseUrl = `http://localhost:${process.env.REACT_APP_PORT}`) => ({
+  movies: (baseUrl = `https://react-imdb-search.herokuapp.com/`) => ({
     async index(query) {
       try {
         const res = await fetch(`${baseUrl}/movie?query=${query}`)
